@@ -60,21 +60,21 @@ if "start_program" not in st.session_state:
     st.session_state.start_program = True
 #%% IMAGENES
 if "ht_2" not in st.session_state:
-    st.session_state.ht_2 = Image.open('ht2.jfif')
+    st.session_state.ht_2 = Image.open('/home/grojas/server/server/interfaz_sabana/ht2.jfif')
 if "boca_abajo" not in st.session_state:
-    st.session_state.boca_abajo = Image.open('boca_abajo.png')
+    st.session_state.boca_abajo = Image.open('/home/grojas/server/server/interfaz_sabana/boca_abajo.png')
 if "boca_arriba" not in st.session_state:
-    st.session_state.boca_arriba = Image.open('boca_arriba.png') 
+    st.session_state.boca_arriba = Image.open('/home/grojas/server/server/interfaz_sabana/boca_arriba.png') 
 if "h_izq" not in st.session_state:
-    st.session_state.h_izq = Image.open('hombro_izquierdo.png')
+    st.session_state.h_izq = Image.open('/home/grojas/server/server/interfaz_sabana/hombro_izquierdo.png')
 if "h_der" not in st.session_state:
-    st.session_state.h_der = Image.open('hombro_derecho.png')
+    st.session_state.h_der = Image.open('/home/grojas/server/server/interfaz_sabana/hombro_derecho.png')
 if "bed" not in st.session_state:
-    st.session_state.bed = Image.open('bed_alone.png')
+    st.session_state.bed = Image.open('/home/grojas/server/server/interfaz_sabana/bed_alone.png')
 
 #%% BASE DE DATOS PACIENTES CON SÁBANA
 
-filename = 'datos_pos.pickle'
+filename = '/home/grojas/server/server/interfaz_sabana/datos_pos.pickle'
 if "infile" not in st.session_state:
     st.session_state.infile = open(filename,'rb')
 if "df_datos" not in st.session_state:
@@ -91,7 +91,7 @@ if "clf" not in st.session_state:
     st.session_state.clf = svm.SVC()
     st.session_state.clf.fit(X,y)
 
-db_pctes = "database_pctes.xlsx"
+db_pctes = "/home/grojas/server/server/interfaz_sabana/database_pctes.xlsx"
 
 if "db_pctes_df" not in st.session_state:
     st.session_state.db_pctes_df = pd.read_excel(db_pctes,index_col=[0])
@@ -180,7 +180,7 @@ def parameter_interface():
     
     col1, mid, col2 = st.columns([1,10,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Selección de parámetros</h1>", unsafe_allow_html=True)
@@ -302,7 +302,7 @@ async def health_team_interface():
 
     col1, mid, col2 = st.columns([1,10,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Interfaz de pacientes</h1>", unsafe_allow_html=True)
 
@@ -320,13 +320,13 @@ async def health_team_interface():
     col1,mid,col2 = st.sidebar.columns([1,1,1])
     
     with col1:
-        st.image('c_verde.png',width=50)
+        st.image('/home/grojas/server/server/interfaz_sabana/c_verde.png',width=50)
         st.write('Buen estado')
     with mid:
-        st.image('c_amarillo.png',width=50)
+        st.image('/home/grojas/server/server/interfaz_sabana/c_amarillo.png',width=50)
         st.write('Estado regular')
     with col2:
-        st.image('c_rojo.png',width=50)
+        st.image('/home/grojas/server/server/interfaz_sabana/c_rojo.png',width=50)
         st.write('Estado crítico')
         
     psql_table = 'SELECT * FROM pct_table'
@@ -359,7 +359,7 @@ async def health_team_interface():
 
         col1, mid, col2 = st.columns([1,5,1])
         with col1:
-            st.image('bed_sheet_logo.png', width=90)
+            st.image('/home/grojas/server/server/interfaz_sabana/bed_sheet_logo.png', width=90)
         with mid:
             st.write('Identificador: ' + str(df_general['mac'][i]))
             st.write('Nombre: ' + str(df_general['nombre'][i]))
@@ -389,7 +389,7 @@ def download_csv_file_interface():
         st.session_state.state_csv = 0
     col1, mid, col2 = st.columns([1,5,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Interfaz de descarga archivo de datos</h1>", unsafe_allow_html=True)
     
@@ -547,7 +547,7 @@ def active_users_int():
     
     col1, mid, col2 = st.columns([1,5,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Interfaz de sábanas activas</h1>", unsafe_allow_html=True)
     st.header('Desarrollado por Healthtracker')
@@ -622,7 +622,7 @@ def active_users_int():
     
     for active_users in active:
         with col1:
-            st.image('c_verde.png',width=50)
+            st.image('/home/grojas/server/server/interfaz_sabana/c_verde.png',width=50)
         with mid:
             index_sab = df_pcts2['id_sabana'].loc[df_pcts2['mac'] == active_users.replace('mac_','')].index[0]
             id_sab = df_pcts2['id_sabana'].loc[df_pcts2['mac'] == active_users.replace('mac_','')][index_sab]
@@ -639,7 +639,7 @@ def active_users_int():
 def user_control():
     col1, mid, col2 = st.columns([1,5,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Interfaz para gestionar pacientes</h1>", unsafe_allow_html=True)
     users = st.radio(
@@ -765,7 +765,7 @@ def assign_control():
 
     col1, mid, col2 = st.columns([1,5,1])
     with col1:
-        st.image('logo.png', width=90)
+        st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
     with mid:
         st.markdown("<h1 style='text-align: center; color: black;'>Interfaz para gestionar asignaciones</h1>", unsafe_allow_html=True)
     # st.write('Desarrollado por ***Healthtracker***')
@@ -1043,7 +1043,7 @@ async def main():
 
         col1, mid, col2 = st.columns([1,5,1])
         with col1:
-            image = st.image('logo.png', width=90)
+            image = st.image('/home/grojas/server/server/interfaz_sabana/logo.png', width=90)
         with mid:
             title = st.markdown("<h1 style='text-align: center; color: black;'>Interfaz general</h1>", unsafe_allow_html=True)
 
