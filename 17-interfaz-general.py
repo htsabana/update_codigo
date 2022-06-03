@@ -1061,6 +1061,14 @@ async def main():
             'Sábanas activas'),key=13)
         
         submit_button = form_.form_submit_button(label='Ingresar a interfaz')
+        
+        if st.button('Cerrar sesión'):
+
+            st.session_state.state2 = 0
+            st.session_state.state_but = 0
+            st.info('Cerrando sesión...')
+            st_autorefresh()
+        
         if submit_button or st.session_state.state_but == 1:
             st.session_state.state_but = 1
             if menu == 'Control de pacientes':
@@ -1122,8 +1130,8 @@ def login():
         p_ = ''
         u = st.empty()
         p = st.empty()
-        u_ = form.text_input('Usuario')
-        p_ = form.text_input('Contraseña',type='password')
+        u_ = form.text_input('Usuario',key='user')
+        p_ = form.text_input('Contraseña',type='password',key='pass')
         submit_button = form.form_submit_button(label='Ingresar')
         # print(u_)
         if u_ == user and p_ == pass_:
@@ -1138,7 +1146,8 @@ def login():
                 connected.success('Usuario y contraseña correctos, conectando a interfaz general...')
                 time.sleep(1)
                 connected.empty()
-
+                del st.session_state['user']
+                del st.session_state['pass']
                 asyncio.run(main())
         elif (u_ != user and p_ != pass_) or (u_ == user and p_ != pass_) or (u_ != user and p_ == pass_):
             if u_ == '' and p_ == '':
