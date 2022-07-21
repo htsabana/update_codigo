@@ -11,7 +11,7 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import pandas as pd
 import psycopg2 as pg
-import streamlit as st
+# import streamlit as st
 import pandas.io.sql as psql
 from operator import add
 import time
@@ -46,7 +46,7 @@ con = pg.connect(
 #cursor
 cur = con.cursor()
 
-info = st.empty()
+# info = st.empty()
 
 def butter_lowpass_filter(data, cutoff, fs, order):
     normal_cutoff = cutoff / nyq
@@ -160,7 +160,7 @@ while True:
             num_samp = len(Prom)    # Muestras
             frec_resp = num_peaks/(num_samp*0.03333/60) # Calculo en respiraciones/seg
             # select_script_users = 'SELECT * FROM'
-            print(str(frec_resp) + ' ' + str(mac) + ' ' +  str(id_))
+            # print(str(frec_resp) + ' ' + str(mac) + ' ' +  str(id_))
             # info.info('Frecuencia respiratoria  = ' + str(round(frec_resp,2)) + ' resp/min')
             insert_script = 'INSERT INTO frec_resp (id_pct,frec) VALUES (%s,%s)'
             values = (str(id_),round(frec_resp,2))
